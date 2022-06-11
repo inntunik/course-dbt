@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: stg_greenery__products
+    description: products information
+    columns:
+      - name: product_id
+        tests:
+        - not_null
+        - unique
+      - name: name
+        tests:
+          - unique
+          - not_null
+      - name: price
+        tests:
+          - not_null
+          - positive_values
+      - name: inventory
+        tests:
+          - not_null
+          - positive_values

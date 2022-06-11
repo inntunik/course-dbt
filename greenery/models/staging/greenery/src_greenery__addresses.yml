@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: stg_greenery__addresses
+    description: customer's shipping information
+    columns:
+      - name: address_id
+        tests:
+        - not_null
+        - unique
+      - name: address
+        tests:
+          - not_null
+      - name: zipcode
+        tests: 
+          - not_null
+      - name: state
+        tests:
+          - not_null
+      - name: country
+        tests: 
+          - not_null

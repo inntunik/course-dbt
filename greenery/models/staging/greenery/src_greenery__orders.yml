@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: stg_greenery__orders
+    description: information about orders, shipping, tracking, and delivery
+    columns:
+      - name: order_id
+        tests:
+        - not_null
+        - unique
+      - name: promo_id
+      - name: user_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_greenery__users')
+              field: user_id  
+      - name: address_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_greenery__addresses')
+              field: address_id
+      - name: created_at  
+      - name: order_cost
+        tests:
+          - not_null
+          - positive_values
+      - name: shipping_cost
+        tests:
+          - not_null
+          - positive_values 
+      - name: order_total
+        tests:
+          - not_null
+          - positive_values
+      - name: tracking_id
+      - name: shipping_service
+        tests:
+          - accepted_values:
+              values:
+                - fedex
+                - dhl
+                - ups
+                - usps
+      - name: estimated_delivery_at
+      - name: delivered_at
+      - name: status
+      #  tests:
+      #    - not_null
+      #    - accepted_values:
+      #        values: ['inactive','active']
