@@ -17,12 +17,12 @@ with orders_source as (
     , created_at as created_at_utc
     , order_cost
     , shipping_cost
-    , order_total
+    , order_total as order_total_cost
     , tracking_id as tracking_guid
     , shipping_service
     , estimated_delivery_at as estimated_delivery_at_utc
     , delivered_at as delivered_at_utc
-    , status
+    , status as ordered_status
   from orders_source
 
 )

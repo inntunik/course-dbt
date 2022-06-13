@@ -12,7 +12,7 @@ renamed_casted as (
   select
     promo_id as promo_guid
     , discount
-    , status
+    , status as ordered_status
   from promos_source
 
 )
