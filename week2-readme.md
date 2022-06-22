@@ -47,8 +47,8 @@ from user_purchases
 
 ## Did you find any “bad” data as you added and ran tests on your models? How did you go about either cleaning the data in the dbt model or adjusting your assumptions/tests?
 
-> I found promo code GUID was originally in an arbitrary format, so we need to clean the staging model of the promo code up before further analysis.
+> I found promo code GUID was originally in an arbitrary format, so I need to clean the staging model of the promo code up before further analysis.
 
 ## Your stakeholders at Greenery want to understand the state of the data each day. Explain how you would ensure these tests are passing regularly and how you would alert stakeholders about bad data getting through.
 
-> We have an automated system that schedules the tests to run every morning to make sure the data are in the good condition and ready for reporting and analyses. If a test fails, the system will notify us; therefore, we can jump in and fix it before the data users know.
+> I have an automated system that schedules the tests to run every morning to make sure the data are in the good condition and ready for reporting and analyses. If a test fails, the system will notify me; therefore, I can jump in and fix it before the data users know.
