@@ -36,3 +36,9 @@ models:
     # Config indicated by + and applies to all files under models/example/
     example:
       +materialized: view
+      +enabled: false
+    staging:
+      greenery:
+        +materialized: view
+      tutorial:
+        +enabled: false

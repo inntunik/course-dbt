@@ -1,0 +1,194 @@
+version: 2
+
+models:
+  - name: stg_greenery__addresses
+    description: customer's shipping information
+    columns:
+      - name: address_guid
+      #  tests:
+      #  - not_null
+      #  - unique
+      - name: street_address
+        tests:
+          - not_null
+      - name: zip_code
+        tests: 
+          - not_null
+      - name: state
+        tests:
+          - not_null
+      - name: country
+        tests: 
+          - not_null
+
+  - name: stg_greenery__events
+    description: information about events
+    columns:
+      - name: event_guid
+        tests:
+        - not_null
+        - unique
+      - name: session_guid
+        tests:
+        - not_null
+      - name: user_guid
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_greenery__users')
+              field: user_guid
+      - name: event_type
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - checkout
+                - package_shipped
+                - add_to_cart
+                - page_view 
+      - name: page_url
+        tests: 
+          - not_null
+      - name: created_at_utc
+      - name: order_guid
+        tests:
+          - relationships:
+              to: ref('stg_greenery__orders')
+              field: order_guid     
+      - name: product_guid
+        tests:
+          - relationships:
+              to: ref('stg_greenery__products')
+              field: product_guid     
+
+  - name: stg_greenery__order_items
+    description: list of items per order 
+    columns:
+      - name: order_guid
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_greenery__orders')
+              field: order_guid        
+      - name: product_guid
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_greenery__products')
+              field: product_guid  
+      - name: quantity
+        tests:
+          - not_null
+          - positive_values
+
+  - name: stg_greenery__orders
+    description: information about orders, shipping, tracking, and delivery
+    columns:
+      - name: order_guid
+        tests:
+        - not_null
+        - unique
+      - name: promo_guid
+      - name: user_guid
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_greenery__users')
+              field: user_guid  
+      - name: address_guid
+        tests:
+          #- not_null
+          - relationships:
+              to: ref('stg_greenery__addresses')
+              field: address_guid
+      - name: created_at_utc  
+      - name: order_cost
+        tests:
+          - not_null
+          - positive_values
+      - name: shipping_cost
+        tests:
+          - not_null
+          - positive_values 
+      - name: order_total_cost
+        tests:
+          - not_null
+          - positive_values
+      - name: tracking_guid
+      - name: shipping_service
+        tests:
+          - accepted_values:
+              values:
+                - fedex
+                - dhl
+                - ups
+                - usps
+      - name: estimated_delivery_at_utc
+      - name: delivered_at_utc
+      - name: ordered_status
+        #tests:
+        #  - not_null
+        #  - accepted_values:
+        #      values: ['inactive','active']
+
+  - name: stg_greenery__products
+    description: products information
+    columns:
+      - name: product_guid
+        tests:
+        - not_null
+        - unique
+      - name: name
+        tests:
+          - unique
+          - not_null
+      - name: price
+        tests:
+          - not_null
+          - positive_values
+      - name: inventory
+        tests:
+          - not_null
+          - positive_values
+
+  - name: stg_greenery__promos
+    description: promotional information
+    columns:
+      - name: promo_guid
+        tests:
+        - not_null
+        - unique
+      - name: discount
+        tests:
+          - not_null
+      - name: ordered_status
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['inactive','active']
+
+  - name: stg_greenery__users
+    description: contact informtaion about customers
+    columns:
+      - name: user_guid
+        tests:
+        - not_null
+        - unique
+      - name: first_name
+        tests:
+          - not_null
+      - name: last_name
+        tests:
+          - not_null
+      - name: email
+        tests:
+          - not_null
+      - name: phone_number
+        tests:
+          - not_null
+      - name: created_at_utc
+      - name: updated_at_utc
+      - name: address_guid
+      #  tests:
+      #    - not_null
+      #    - unique
