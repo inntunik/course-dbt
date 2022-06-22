@@ -3,12 +3,12 @@
 ## What is our user repeat rate?
 ```
 with base as (
-  select
-    user_guid
-    , count(distinct order_guid) as user_orders
-  from dbt_inna_t.stg_greenery__orders
-  group by user_guid
+    select user_guid
+        , count(distinct order_guid) as user_orders
+    from dbt_inna_t.stg_greenery__orders
+    group by user_guid
 ),
+
 user_purchases as (
   select
     user_guid
@@ -17,15 +17,16 @@ user_purchases as (
     , (user_orders >= 1)::int as three_purchases
   from base
 )
+
 select 
-  sum(two_purchases)::float / count(distinct user_guid) as repeat_rate
+    sum(two_purchases)::float / count(distinct user_guid) as repeat_rate
 from user_purchases
 ``` 
-> Answer: The repeat rate is 0.7983870967741935.
+> Answer: The repeat rate is 0.7983870967741935
 
 ## Explain the marts models you added. Why did you organize the models in the way you did?
 
-> I added the users and products dimensions as I think they are entities and behave like a catalog. The facts that I added are growing constantly, and have user_id or product_id to be able to join to the dimensions in order to get full information.
+> I added core, marketing and product marts. I was 
 
 ## What assumptions are you making about each model? (i.e. why are you adding each test?)
 
