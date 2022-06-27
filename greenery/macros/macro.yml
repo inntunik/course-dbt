@@ -1,0 +1,7 @@
+version: 2
+
+macros:
+  - name: role_auth
+    arguments: 
+      - name: role
+        type: string
