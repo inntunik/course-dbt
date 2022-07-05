@@ -1,7 +1,9 @@
 version: 2
 
 models:
-  - name: int_session_events_basic_agg
+  - name: int__session_events_agg
+    description: Session event aggregated to count the number of events in each type
+  - name: int__session_events_basic_agg
     description: Event type by session id and user
-  - name: fct_session
+  - name: fct__session
     description: summary information session's event type and time spent by the user

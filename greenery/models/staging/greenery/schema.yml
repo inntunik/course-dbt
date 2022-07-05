@@ -138,7 +138,7 @@ models:
         tests:
         - not_null
         - unique
-      - name: name
+      - name: product_name
         tests:
           - unique
           - not_null

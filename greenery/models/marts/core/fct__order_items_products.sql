@@ -1,6 +1,6 @@
 select oi.order_guid 
     , oi.product_guid 
-    , p.name as product_name 
+    , p.product_name 
     , p.price as product_price
     , oi.quantity as product_quantity 
     , p.price * oi.quantity as user_prod_expenditure

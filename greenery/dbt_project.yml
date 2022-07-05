@@ -40,6 +40,5 @@ models:
     staging:
       greenery:
         +materialized: view
-      tutorial:
-        +enabled: false
+
 

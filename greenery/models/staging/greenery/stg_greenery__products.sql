@@ -11,7 +11,7 @@ with products_source as (
 , renamed_casted as (
   select
     product_id as product_guid
-    , name
+    , name as product_name
     , price
     , inventory
   from products_source
